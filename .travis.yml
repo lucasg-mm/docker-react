@@ -1,15 +1,8 @@
 language: generic
-# tells travis we need super user permissions
-sudo: required
-
-# tells travis  we need a copy of docker
-services:
+sudo: required # tells travis we need super user permissions
+services: # tells travis we need a copy of docker
   - docker
-
-# commands executed before our tests are ran
-before_install:
+before_install: # commands executed before our tests are ran
   - docker build -t lucasgmm20/docker-react -f Dockerfile.dev .
-
-# commands executed to run the test suite
-script:
+script: # commands executed to run the test suite
   - docker run -e CI=true lucasgmm20/docker-react npm run test
