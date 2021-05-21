@@ -6,3 +6,14 @@ before_install: # commands executed before our tests are ran
   - docker build -t lucasgmm20/docker-react -f Dockerfile.dev .
 script: # commands executed to run the test suite
   - docker run -e CI=true lucasgmm20/docker-react npm run test
+deploy: # tells what travis should do when deploying
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "docker-react"
+  env: "Dockerreact-env"
+  bucket_name: "elasticbeanstalk-us-east-2-309613703225"
+  bucket_path: "docker-react"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
